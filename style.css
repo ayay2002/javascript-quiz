@@ -1,4 +1,37 @@
 header{
-    display: flex
-    flex
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+h1{
+    font-size: 15px;
+    color: blueviolet;
+}
+#highscore{
+    border: 0px;
+    color: blueviolet;
+    font-weight: bold;
+}
+#highscore:hover{
+    border: 2px;
+    border-style: solid;
+    border-color: blueviolet;
+    cursor: pointer;
+}
+#QuestionBox{
+    margin-top: 200px;
+    border: 4px;
+    border-style: solid;
+    border-color: blueviolet;
+    border-radius: 5px;
+    width: 500px;
+}
+h2{
+    display: flex;
+    justify-content: center;
+}
+ul{
+    list-style: none;
+    display: flexbox
 }
