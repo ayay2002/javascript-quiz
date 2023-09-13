@@ -35,3 +35,6 @@ ul{
     list-style: none;
     display: flexbox
 }
+.hide{
+    display:none
+}
