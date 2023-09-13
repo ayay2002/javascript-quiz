@@ -10,21 +10,31 @@
 
 <body>
     <header>
-        <button id= "highscore" type="button">View Highscores</button>
+        <button id="highscore" type="button">View Highscores</button>
         <h1>Time: <span id="timer">#</span></h1>
     </header>
-
- <button id="start">Start</button>
+    <div id="startbox">
+        <h2>Welcome to your Javascript Quiz!</h2>
+        <p>You will have 1 minute to complete 10 questions. Be aware if you answer a question wrong, you will lose 5 seconds. Good luck!</p>
+        <button id="start">Start</button>
+    </div>
 
     <div id="QuestionBox" class="hide">
         <h2 id="Question">Question</h2>
         <ul>
             <li><button id="answer1">Answer 1</button></li>
-            <li><button  id="answer2">Answer 2</button></li>
+            <li><button id="answer2">Answer 2</button></li>
             <li><button id="answer3">Answer 3</button></li>
             <li><button id="answer4">Answer 4</button></li>
         </ul>
     </div>
+
+    <div id="scorebox" class="hide">
+        <h1 id="score">Score</h1>
+        <input type="text" id="initials">
+        <button id="submit">Submit</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

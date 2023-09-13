@@ -19,6 +19,14 @@ h1{
     border-color: blueviolet;
     cursor: pointer;
 }
+#startbox{
+    margin-top: 200px;
+    border: 4px;
+    border-style: solid;
+    border-color: blueviolet;
+    border-radius: 5px;
+    width: 500px; 
+}
 #QuestionBox{
     margin-top: 200px;
     border: 4px;
