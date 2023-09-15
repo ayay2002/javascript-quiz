@@ -11,6 +11,10 @@ answer2box.addEventListener("click", chooseanswer)
 var startbox = document.getElementById("startbox")
 var scorebox = document.getElementById("scorebox")
 
+var highscores = JSON.parse(localStorage.getItem("scores"))
+if (!highscores) {
+    highscores = []
+}
 
 
 var questions = [
@@ -59,12 +63,11 @@ var startbutton = document.getElementById("start")
 startbutton.addEventListener("click", start)
 function start() {
     startTimer()
-    startbutton.classList.add("hide")
     scorebox.classList.add("hide")
-    scorebox
     questionindex = 0
     score = 0
     document.getElementById("QuestionBox").classList.remove("hide")
+    document.getElementById("startbox").setAttribute("style", "display:none")
     setquestion()
 }
 // var restartbutton = document.getElementById("restart")
@@ -97,17 +100,23 @@ function chooseanswer(event) {
         setquestion()
     }
 }
+var endtimer = document.getElementById("timer")
 function end() {
     if (questionindex >= questions.length - 1) {
         QuestionBox.classList.add("hide")
         scorebox.classList.remove("hide")
+        endtimer.classList.add("hide")
         document.getElementById("score").innerText = "score: " + score
-        
     }
 }
 var submitbutton = document.getElementById("submit")
 submitbutton.addEventListener("click", submitscore)
-var initials
-function submitscore(){
-initials
+// var initials = document.getElementById("initials")
+function submitscore() {
+var initials = document.getElementById("initials").value
+console.log(initials)
+var score = document.getElementById("score").textContent
+console.log(score)
+highscores.push(initials+" " +score)
+localStorage.setItem("scores",  JSON.stringify)
 }
