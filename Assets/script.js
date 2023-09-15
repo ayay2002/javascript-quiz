@@ -7,46 +7,195 @@ var answer1box = document.getElementById("answer1")
 answer1box.addEventListener("click", chooseanswer)
 var answer2box = document.getElementById("answer2")
 answer2box.addEventListener("click", chooseanswer)
+var answer3box = document.getElementById("answer3")
+answer3box.addEventListener("click", chooseanswer)
+var answer4box = document.getElementById("answer4")
+answer4box.addEventListener("click", chooseanswer)
 
 var startbox = document.getElementById("startbox")
 var scorebox = document.getElementById("scorebox")
 
-var highscores = JSON.parse(localStorage.getItem("scores"))
-if (!highscores) {
-    highscores = []
-}
+// var highscores = JSON.parse(localStorage.getItem("scores"))
+// if (!highscores) {
+//     highscores = []
+// }
 
 
 var questions = [
     {
-        question: "first question",
+        question: "What is considered a Block statement in Javascript?",
         answers: [
             {
-                Text: "answer 1",
+                Text: "Conditional Block",
+                correct: false
+            },{
+                Text: "Block that combines a number of statements into a single compound statement",
                 correct: true
-            },
-            {
-                Text: "answer 2",
+            },{
+                Text: "Both conditional block and a single statement",
+                correct: false
+            },{
+                Text: "Block that contains a single statement",
                 correct: false
             }
         ]
     },
     {
-        question: "second question",
+        question: "The function and var are known as:",
         answers: [
             {
-                Text: "answer 1",
+                Text: "Keywords",
                 correct: false
-            },
+            },{
+                Text: "Data types",
+                correct: false
+            },{
+                Text: "Decloration Statements",
+                correct: true
+            },{
+                Text: "Prototypes",
+                correct: false
+            }
+        ]
+    },{
+        question: "Which of the following variables takes precedence over the others if the names are the same?",
+        answers: [
             {
-                Text: "answer 2",
+                Text: "Global Variable",
+                correct: false
+            },{
+                Text: "The local element",
+                correct: true
+            },{
+                Text: "Class",
+                correct: false
+            },{
+                Text: "Id",
+                correct: false
+            }
+        ]
+    },{
+        question: "Which one of the following is the correct way for calling the JavaScript code?",
+        answers: [
+            {
+                Text: "Preprocessor",
+                correct: false
+            },{
+                Text: "Triggering Event",
+                correct: false
+            },{
+                Text: "RMI",
+                correct: false
+            },{
+                Text: "Function/Method",
                 correct: true
             }
         ]
+    },{
+        question: " Which of the following type of a variable is volatile?",
+        answers: [
+            {
+                Text: "Mutable Variable",
+                correct: true
+            },{
+                Text: "Dynamic Variable",
+                correct: false
+            },{
+                Text: "Volatile Variable",
+                correct: false
+            },{
+                Text: "Immutable Variable",
+                correct: false
+            }
+        ]
+    },{
+        question: "In the JavaScript, which one of the following is not considered as an error:",
+        answers: [
+            {
+                Text: "Syntax Error",
+                correct: false
+            },{
+                Text: "Missing of semicolons",
+                correct: false
+            },{
+                Text: "Division by Zero",
+                correct: true
+            },{
+                Text: "Missing of Bracket",
+                correct: false
+            }
+        ]
+    },{
+        question: "Which one of the following operator returns false if both values are equal?",
+        answers: [
+            {
+                Text: "!",
+                correct: false
+            },{
+                Text: "!==",
+                correct: false
+            },{
+                Text: "!=",
+                correct: true
+            },{
+                Text: "all of the above",
+                correct: false
+            }
+        ]
+    },{
+        question: "Which of the following number object function returns the value of the number?",
+        answers: [
+            {
+                Text: "toString()",
+                correct: false
+            },{
+                Text: "valueOf()",
+                correct: true
+            },{
+                Text: "toLocaleString()",
+                correct: false
+            },{
+                Text: "toPrecision",
+                correct: false
+            }
+        ]
+    },{
+        question: "Choose the correct snippet from the following to check if the variable a is not equal the NULL:",
+        answers: [
+            {
+                Text: "if(a!==null)",
+                correct: true
+            },{
+                Text: "if (a!)",
+                correct: false
+            },{
+                Text: "if(a!null)",
+                correct: false
+            },{
+                Text: "if(a!=null)",
+                correct: false
+            }
+        ]
+    },{
+        question: "What we will get if we compare the one with 8 using the less than operator (one<2)?",
+        answers: [
+            {
+                Text: "False",
+                correct: true
+            },{
+                Text: "True",
+                correct: false
+            },{
+                Text: "NaN",
+                correct: false
+            },{
+                Text: "Undefined",
+                correct: false
+            }
+        ]
     }
-
 ]
-var timer = 60
+var timer = 59
 function startTimer() {
     interval = setInterval(() => {
         document.getElementById('timer').textContent = timer
@@ -85,11 +234,15 @@ function setquestion() {
         } answerbox.dataset.correct = questions[questionindex].answers[index].correct
     }
 }
-
 function chooseanswer(event) {
     var correct = event.target.dataset.correct
     if (correct === "true") {
         score += 10
+        // var right = document.getElementsByTagName("h3")
+        // var text = document.createTextNode("Right")
+        // right.appendChild(text)
+        // console.log(right)
+
     } else {
         timer -= 5
     }
@@ -105,18 +258,28 @@ function end() {
     if (questionindex >= questions.length - 1) {
         QuestionBox.classList.add("hide")
         scorebox.classList.remove("hide")
-        endtimer.classList.add("hide")
-        document.getElementById("score").innerText = "score: " + score
+        // endtimer.classList.add("hide")
+        document.getElementById("score").innerText = "Score: " + score
     }
+}
+// var initials = document.getElementById("initials").value
+// var score = document.getElementById("score").textContent
+
+function savescore(){
+    var initials = document.getElementById("initials").value
+    var score = document.getElementById("score").textContent
+    var userscore ={
+        initials,
+        score
+    };
+    console.log(initials)
+    localStorage.setItem("userscore",  JSON.stringify(userscore))
 }
 var submitbutton = document.getElementById("submit")
 submitbutton.addEventListener("click", submitscore)
 // var initials = document.getElementById("initials")
 function submitscore() {
-var initials = document.getElementById("initials").value
-console.log(initials)
-var score = document.getElementById("score").textContent
-console.log(score)
-highscores.push(initials+" " +score)
-localStorage.setItem("scores",  JSON.stringify)
+    savescore();
+    
+// highscores.push(initials+" " +score)
 }
