@@ -1,6 +1,7 @@
 var questionindex = 0
 var correctanswerindex = 0
 var score = 0
+var leaderboard = document.getElementById("ranks")
 var questionbox = document.getElementById("QuestionBox")
 var questionel = document.getElementById("Question")
 var answer1box = document.getElementById("answer1")
@@ -19,7 +20,6 @@ var scorebox = document.getElementById("scorebox")
 // if (!highscores) {
 //     highscores = []
 // }
-
 
 var questions = [
     {
@@ -195,6 +195,7 @@ var questions = [
         ]
     }
 ]
+var interval
 var timer = 59
 function startTimer() {
     interval = setInterval(() => {
@@ -206,7 +207,17 @@ function startTimer() {
         }
     }, 1000);
 }
-var interval
+
+
+var highscoresbutton = document.getElementById("highscore")
+highscoresbutton.addEventListener("click", showscores)
+function showscores(){
+    scorebox.classList.remove("hide")
+    document.getElementById("QuestionBox").classList.add("hide")
+    document.getElementById("startbox").setAttribute("style", "display:none")
+    init();
+    displayranks();
+}
 
 var startbutton = document.getElementById("start")
 startbutton.addEventListener("click", start)
@@ -253,8 +264,8 @@ function chooseanswer(event) {
         setquestion()
     }
 }
-var endtimer = document.getElementById("timer")
 function end() {
+    clearInterval(interval);
     if (questionindex >= questions.length - 1) {
         QuestionBox.classList.add("hide")
         scorebox.classList.remove("hide")
@@ -262,24 +273,50 @@ function end() {
         document.getElementById("score").innerText = "Score: " + score
     }
 }
+timeclock = document.getElementById("timer")
+if (timeclock.textContent == 58){
+    console.log("hello")
+    end()
+}
 // var initials = document.getElementById("initials").value
 // var score = document.getElementById("score").textContent
-
+var allscores = [];
 function savescore(){
+    // get all the existing data
+    // push the new value to the existing data
+    // save to local storage
     var initials = document.getElementById("initials").value
     var score = document.getElementById("score").textContent
     var userscore ={
         initials,
         score
     };
-    console.log(initials)
-    localStorage.setItem("userscore",  JSON.stringify(userscore))
+    allscores.push(userscore)
+    localStorage.setItem("userscore",  JSON.stringify(allscores))
 }
+
+function displayranks(){
+    leaderboard.innerHTML = "";
+    for (var i=0; i < allscores.length; i++){
+        var currentScore = allscores[i].initials + ": " + allscores[i].score;
+
+        var li = document.createElement("li");
+        li.textContent = currentScore;
+        li.setAttribute("data-index", i);
+
+
+        leaderboard.appendChild(li);
+    }
+}
+function init(){
+    var storedscores =  JSON.parse(localStorage.getItem("userscore")) || [];
+    allscores = storedscores;
+}
+
 var submitbutton = document.getElementById("submit")
 submitbutton.addEventListener("click", submitscore)
-// var initials = document.getElementById("initials")
 function submitscore() {
+    init();
     savescore();
-    
-// highscores.push(initials+" " +score)
+    displayranks();
 }
