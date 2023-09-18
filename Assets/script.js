@@ -197,6 +197,7 @@ function startTimer() {
         document.getElementById('timer').textContent = timer
         if (timer <= 0) {
             clearInterval(interval)
+            end()
         } else {
             timer--
         }
@@ -243,6 +244,7 @@ function chooseanswer(event) {
         score += 10
     } else {
         timer -= 5
+        document.getElementById('timer').textContent = timer
     }
     if (questionindex >= questions.length - 1) {
         end()
@@ -263,10 +265,6 @@ function end() {
     }
 }
 // ends quiz when  timer hits 0
-timeclock = document.getElementById("timer")
-if (timeclock.textContent == 0){
-    end()
-}
 var allscores = [];
 function savescore(){
     // get all the existing data
