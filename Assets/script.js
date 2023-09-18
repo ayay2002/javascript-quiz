@@ -12,15 +12,9 @@ var answer3box = document.getElementById("answer3")
 answer3box.addEventListener("click", chooseanswer)
 var answer4box = document.getElementById("answer4")
 answer4box.addEventListener("click", chooseanswer)
-
 var startbox = document.getElementById("startbox")
 var scorebox = document.getElementById("scorebox")
-
-// var highscores = JSON.parse(localStorage.getItem("scores"))
-// if (!highscores) {
-//     highscores = []
-// }
-
+// all my questions and answers
 var questions = [
     {
         question: "What is considered a Block statement in Javascript?",
@@ -195,8 +189,9 @@ var questions = [
         ]
     }
 ]
+// timer function 
 var interval
-var timer = 59
+var timer = 60
 function startTimer() {
     interval = setInterval(() => {
         document.getElementById('timer').textContent = timer
@@ -207,8 +202,7 @@ function startTimer() {
         }
     }, 1000);
 }
-
-
+// show scorews when you click highscores
 var highscoresbutton = document.getElementById("highscore")
 highscoresbutton.addEventListener("click", showscores)
 function showscores(){
@@ -218,7 +212,7 @@ function showscores(){
     init();
     displayranks();
 }
-
+// button to start quiz
 var startbutton = document.getElementById("start")
 startbutton.addEventListener("click", start)
 function start() {
@@ -230,14 +224,11 @@ function start() {
     document.getElementById("startbox").setAttribute("style", "display:none")
     setquestion()
 }
-// var restartbutton = document.getElementById("restart")
-// restartbutton.addEventListener("click", start)
-
+// next questions when you answer a question
 function setquestion() {
     questionel.innerText = questions[questionindex].question
     for (let index = 0; index < questions[questionindex].answers.length; index++) {
         var answerbox = document.getElementById("answer" + (index + 1));
-        //console.log("answer"+(index+1));
         answerbox.innerText = questions[questionindex].answers[index].Text
         if (questions[questionindex].answers[index].correct) {
             correctanswerindex = index
@@ -245,15 +236,11 @@ function setquestion() {
         } answerbox.dataset.correct = questions[questionindex].answers[index].correct
     }
 }
+// if your right you get 10 points, if not you lose 5 seconds
 function chooseanswer(event) {
     var correct = event.target.dataset.correct
     if (correct === "true") {
         score += 10
-        // var right = document.getElementsByTagName("h3")
-        // var text = document.createTextNode("Right")
-        // right.appendChild(text)
-        // console.log(right)
-
     } else {
         timer -= 5
     }
@@ -264,6 +251,7 @@ function chooseanswer(event) {
         setquestion()
     }
 }
+// ends the quiz to the scorebox
 function end() {
     clearInterval(interval);
     if (questionindex >= questions.length - 1) {
@@ -271,15 +259,14 @@ function end() {
         scorebox.classList.remove("hide")
         // endtimer.classList.add("hide")
         document.getElementById("score").innerText = "Score: " + score
+        document.getElementById("time").innerText = "Time Remaining: " + timer + " sec"
     }
 }
+// ends quiz when  timer hits 0
 timeclock = document.getElementById("timer")
-if (timeclock.textContent == 58){
-    console.log("hello")
+if (timeclock.textContent == 0){
     end()
 }
-// var initials = document.getElementById("initials").value
-// var score = document.getElementById("score").textContent
 var allscores = [];
 function savescore(){
     // get all the existing data
@@ -294,7 +281,7 @@ function savescore(){
     allscores.push(userscore)
     localStorage.setItem("userscore",  JSON.stringify(allscores))
 }
-
+// displays scores in leaderboard
 function displayranks(){
     leaderboard.innerHTML = "";
     for (var i=0; i < allscores.length; i++){

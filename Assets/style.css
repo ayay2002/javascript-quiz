@@ -8,6 +8,7 @@ h1{
     font-size: 15px;
     color: blueviolet;
 }
+/* highscoree button */
 #highscore{
     border: 0px;
     color: blueviolet;
@@ -21,6 +22,7 @@ h1{
     cursor: pointer;
     transform: scale(1.1);
 }
+/* box with start button and quiz description inh the begining */
 #startbox{
     display: inline-block;
     flex-direction: column;
@@ -49,6 +51,7 @@ p{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     margin: 10px;
 }
+/* box that holds the questions and answers */
 #QuestionBox{
     margin-top: 200px;
     margin-left: 50px;
@@ -74,6 +77,7 @@ h2{
 ul{
     list-style: none;
 }
+/* leaderboard */
 #ranks li{
     background-color:aliceblue;
     border-bottom: 1px;
@@ -102,6 +106,7 @@ li button:hover{
     cursor: pointer;
     transform: scale(1.1);
 }
+/* box at the end of the game to submit your score and initials */
 #scorebox{
     flex-direction: column;
     margin-top: 200px;
@@ -116,6 +121,10 @@ li button:hover{
     margin: 10px;
 }
 #score{
+    margin: 10px;
+    font-size: 20px;
+}
+#time{
     margin: 10px;
     font-size: 20px;
 }
